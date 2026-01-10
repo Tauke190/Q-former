@@ -61,3 +61,19 @@
 2026-01-10 17:58:23,981 - INFO - Loading datasets...
 2026-01-10 17:58:24,134 - INFO - Loaded 6000 images for train split
 2026-01-10 17:58:24,181 - INFO - Loaded 1000 images for val split
+2026-01-10 18:04:06,405 - INFO - Using device: cuda
+2026-01-10 18:04:06,405 - INFO - Initializing model...
+2026-01-10 18:04:13,820 - INFO - Total parameters: 610,780,223
+2026-01-10 18:04:13,821 - INFO - Trainable parameters: 183,163,710
+2026-01-10 18:04:13,821 - INFO - Loading datasets...
+2026-01-10 18:04:13,973 - INFO - Loaded 6000 images for train split
+2026-01-10 18:04:14,019 - INFO - Loaded 1000 images for val split
+2026-01-10 18:04:14,020 - INFO - Train samples: 6000
+2026-01-10 18:04:14,020 - INFO - Val samples: 1000
+2026-01-10 18:04:14,022 - INFO - Intialize/Test Validation...
+2026-01-10 18:05:03,818 - INFO - Val - Loss: 13.2921, ITC: 2.1075, ITM: 0.6417, ITG: 10.5429
+2026-01-10 18:05:03,818 - INFO - Starting training...
+2026-01-10 18:05:03,818 - INFO - 
+============================================================
+2026-01-10 18:05:03,818 - INFO - Epoch 1/20
+2026-01-10 18:05:03,818 - INFO - ============================================================

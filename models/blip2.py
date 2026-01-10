@@ -40,7 +40,11 @@ class Blip2Base(nn.Module):
 
         # ========== Vision Encoder (Frozen) ==========
         self.clip_model, self.preprocess = clip.load(clip_model_name, device=device)
-        self.vision_width = self.clip_model.visual.output_dim
+        # Use the actual ViT hidden dimension (not the projection output dimension)
+        # For ViT-L/14: hidden_dim=1024, output_dim=768 (after projection)
+        # We extract features before projection, so we need the hidden dimension
+        self.vision_width = self.clip_model.visual.ln_post.normalized_shape[0]
+        print(f"Initialized CLIP vision encoder: {clip_model_name} with hidden dimension {self.vision_width}")
 
         for param in self.clip_model.parameters():
             param.requires_grad = False
@@ -96,21 +100,29 @@ class Blip2Base(nn.Module):
 
         image = image.to(self.device)
 
+        # Match dtype to CLIP model (handles float16/float32 automatically)
+        clip_dtype = self.clip_model.visual.conv1.weight.dtype
+        image = image.to(dtype=clip_dtype)
+
         # Get intermediate features from CLIP ViT
         x = self.clip_model.visual.conv1(image)
         x = x.reshape(x.shape[0], x.shape[1], -1).permute(0, 2, 1)
-        x = torch.cat([
-            self.clip_model.visual.class_embedding.expand(x.shape[0], -1, -1),
-            x
-        ], dim=1)
-        x = x + self.clip_model.visual.positional_embedding
+        # class_embedding is [hidden_dim], need to make it [1, 1, hidden_dim] then expand to [batch, 1, hidden_dim]
+        class_embedding = self.clip_model.visual.class_embedding.to(clip_dtype)
+        class_embedding = class_embedding.unsqueeze(0).unsqueeze(0).expand(x.shape[0], -1, -1)
+        x = torch.cat([class_embedding, x], dim=1)
+        # Ensure positional_embedding matches dtype
+        x = x + self.clip_model.visual.positional_embedding.to(clip_dtype)
         x = self.clip_model.visual.ln_pre(x)
         x = x.permute(1, 0, 2)
         x = self.clip_model.visual.transformer(x)
         x = x.permute(1, 0, 2)
         image_embeds = self.clip_model.visual.ln_post(x)
 
-        image_atts = torch.ones(image_embeds.size()[:-1], device=self.device)
+        # Convert back to float32 for Q-Former (Q-Former typically runs in float32)
+        image_embeds = image_embeds.float()
+
+        image_atts = torch.ones(image_embeds.size()[:-1], dtype=torch.long, device=self.device)
         return image_embeds, image_atts
 
     def get_query_features(self, image_embeds, image_atts):

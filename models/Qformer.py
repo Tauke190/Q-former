@@ -38,9 +38,11 @@ from transformers.modeling_outputs import (
 )
 from transformers.modeling_utils import (
     PreTrainedModel,
-    apply_chunking_to_forward,
-    find_pruneable_heads_and_indices,
-    prune_linear_layer,
+)
+from transformers.pytorch_utils import (
+    apply_chunking_to_forward, 
+    find_pruneable_heads_and_indices, 
+    prune_linear_layer
 )
 from transformers.utils import logging
 from transformers.models.bert.configuration_bert import BertConfig
@@ -126,8 +128,11 @@ class BertSelfAttention(nn.Module):
 
         self.query = nn.Linear(config.hidden_size, self.all_head_size)
         if is_cross_attention:
-            self.key = nn.Linear(config.encoder_width, self.all_head_size)
-            self.value = nn.Linear(config.encoder_width, self.all_head_size)
+            # Use encoder_width if available, otherwise fall back to hidden_size
+            encoder_width = getattr(config, 'encoder_width', config.hidden_size)
+            print(f"Using encoder_width={encoder_width} for cross-attention key/value projections")
+            self.key = nn.Linear(encoder_width, self.all_head_size)
+            self.value = nn.Linear(encoder_width, self.all_head_size)
         else:
             self.key = nn.Linear(config.hidden_size, self.all_head_size)
             self.value = nn.Linear(config.hidden_size, self.all_head_size)
@@ -183,7 +188,7 @@ class BertSelfAttention(nn.Module):
         is_cross_attention = encoder_hidden_states is not None
 
         if is_cross_attention:
-            key_layer = self.transpose_for_scores(self.key(encoder_hidden_states))
+            key_layer = self.transpose_for_scores(self.key(encoder_hidden_states)) # Reshapes to [ batch_size, seq_len, heads, head_size]
             value_layer = self.transpose_for_scores(self.value(encoder_hidden_states))
             attention_mask = encoder_attention_mask
         elif past_key_value is not None:

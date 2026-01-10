@@ -1,0 +1,63 @@
+2026-01-10 16:52:41,672 - INFO - Using device: cuda
+2026-01-10 16:52:41,673 - INFO - Initializing model...
+2026-01-10 16:52:58,056 - INFO - Total parameters: 634,221,118
+2026-01-10 16:52:58,056 - INFO - Trainable parameters: 206,604,605
+2026-01-10 16:52:58,057 - INFO - Loading datasets...
+2026-01-10 16:52:58,331 - INFO - Loaded 6000 images for train split
+2026-01-10 16:52:58,398 - INFO - Loaded 1000 images for val split
+2026-01-10 16:52:58,399 - INFO - Train samples: 6000
+2026-01-10 16:52:58,399 - INFO - Val samples: 1000
+2026-01-10 16:52:58,401 - INFO - Starting training...
+2026-01-10 16:52:58,401 - INFO - 
+============================================================
+2026-01-10 16:52:58,402 - INFO - Epoch 1/20
+2026-01-10 16:52:58,402 - INFO - ============================================================
+2026-01-10 16:55:50,796 - INFO - Using device: cuda
+2026-01-10 16:55:50,796 - INFO - Initializing model...
+2026-01-10 16:56:06,916 - INFO - Total parameters: 634,221,118
+2026-01-10 16:56:06,917 - INFO - Trainable parameters: 206,604,605
+2026-01-10 16:56:06,917 - INFO - Loading datasets...
+2026-01-10 16:56:07,080 - INFO - Loaded 6000 images for train split
+2026-01-10 16:56:07,129 - INFO - Loaded 1000 images for val split
+2026-01-10 16:56:07,129 - INFO - Train samples: 6000
+2026-01-10 16:56:07,129 - INFO - Val samples: 1000
+2026-01-10 16:56:07,131 - INFO - Starting training...
+2026-01-10 16:56:07,131 - INFO - 
+============================================================
+2026-01-10 16:56:07,131 - INFO - Epoch 1/20
+2026-01-10 16:56:07,131 - INFO - ============================================================
+2026-01-10 17:48:21,990 - INFO - Using device: cuda
+2026-01-10 17:48:21,990 - INFO - Initializing model...
+2026-01-10 17:48:32,207 - INFO - Total parameters: 634,221,118
+2026-01-10 17:48:32,207 - INFO - Trainable parameters: 206,604,605
+2026-01-10 17:48:32,207 - INFO - Loading datasets...
+2026-01-10 17:48:33,877 - INFO - Loaded 6000 images for train split
+2026-01-10 17:48:33,967 - INFO - Loaded 1000 images for val split
+2026-01-10 17:48:33,967 - INFO - Train samples: 6000
+2026-01-10 17:48:33,967 - INFO - Val samples: 1000
+2026-01-10 17:48:33,969 - INFO - Starting training...
+2026-01-10 17:48:33,969 - INFO - 
+============================================================
+2026-01-10 17:48:33,969 - INFO - Epoch 1/20
+2026-01-10 17:48:33,969 - INFO - ============================================================
+2026-01-10 17:52:50,471 - INFO - Using device: cuda
+2026-01-10 17:52:50,471 - INFO - Initializing model...
+2026-01-10 17:53:03,980 - INFO - Total parameters: 610,780,223
+2026-01-10 17:53:03,980 - INFO - Trainable parameters: 183,163,710
+2026-01-10 17:53:03,980 - INFO - Loading datasets...
+2026-01-10 17:53:04,121 - INFO - Loaded 6000 images for train split
+2026-01-10 17:53:04,177 - INFO - Loaded 1000 images for val split
+2026-01-10 17:53:04,177 - INFO - Train samples: 6000
+2026-01-10 17:53:04,178 - INFO - Val samples: 1000
+2026-01-10 17:53:04,179 - INFO - Starting training...
+2026-01-10 17:53:04,180 - INFO - 
+============================================================
+2026-01-10 17:53:04,180 - INFO - Epoch 1/20
+2026-01-10 17:53:04,180 - INFO - ============================================================
+2026-01-10 17:58:12,446 - INFO - Using device: cuda
+2026-01-10 17:58:12,446 - INFO - Initializing model...
+2026-01-10 17:58:23,980 - INFO - Total parameters: 610,780,223
+2026-01-10 17:58:23,980 - INFO - Trainable parameters: 183,163,710
+2026-01-10 17:58:23,981 - INFO - Loading datasets...
+2026-01-10 17:58:24,134 - INFO - Loaded 6000 images for train split
+2026-01-10 17:58:24,181 - INFO - Loaded 1000 images for val split

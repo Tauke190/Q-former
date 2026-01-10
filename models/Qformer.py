@@ -885,13 +885,20 @@ class BertModel(BertPreTrainedModel):
             attention_mask = torch.ones(
                 ((batch_size, seq_length + past_key_values_length)), device=device
             )
+        else:
+            # Extend attention mask to include query tokens (which are always attended to)
+            if query_embeds is not None and attention_mask.shape[1] < seq_length:
+                query_attention_mask = torch.ones(
+                    (batch_size, query_length), device=device, dtype=attention_mask.dtype
+                )
+                attention_mask = torch.cat([query_attention_mask, attention_mask], dim=1)
 
         # We can provide a self-attention mask of dimensions [batch_size, from_seq_length, to_seq_length]
         # ourselves in which case we just need to make it broadcastable to all heads.
         if is_decoder:
             extended_attention_mask = self.get_extended_attention_mask(
                 attention_mask,
-                input_ids.shape,
+                input_shape,
                 device,
                 is_decoder,
                 has_query=(query_embeds is not None),

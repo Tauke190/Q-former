@@ -81,7 +81,10 @@ class Blip2Base(nn.Module):
         # Tokenizer
         self.tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
         self.tokenizer.add_special_tokens({"bos_token": "[DEC]"})
-        self.Qformer.resize_token_embeddings(len(self.tokenizer))
+        # Resize Qformer_lm (not Qformer) - this resizes both the input embeddings
+        # AND the LM head output layer. Since Qformer_lm.bert = self.Qformer,
+        # the shared embeddings are resized for both models.
+        self.Qformer_lm.resize_token_embeddings(len(self.tokenizer))
 
     @torch.no_grad()
     def encode_image(self, image):

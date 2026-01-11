@@ -130,7 +130,7 @@ class BertSelfAttention(nn.Module):
         if is_cross_attention:
             # Use encoder_width if available, otherwise fall back to hidden_size
             encoder_width = getattr(config, 'encoder_width', config.hidden_size)
-            print(f"Using encoder_width={encoder_width} for cross-attention key/value projections")
+            # print(f"Using encoder_width={encoder_width} for cross-attention key/value projections")
             self.key = nn.Linear(encoder_width, self.all_head_size)
             self.value = nn.Linear(encoder_width, self.all_head_size)
         else:

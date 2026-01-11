@@ -1,4 +1,4 @@
-# QFormer from BLIP-2 (Educational Implementation)
+# QFormer from BLIP-2 (Simplified Implementation)
 
 This repository provides a minimal, in-progress implementation of the QFormer architecture from the BLIP-2 model. The code is designed for educational purposes, focusing on clarity and simplicity without extra modules, code, or verbosity.
 

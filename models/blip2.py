@@ -44,7 +44,7 @@ class Blip2Base(nn.Module):
         # For ViT-L/14: hidden_dim=1024, output_dim=768 (after projection)
         # We extract features before projection, so we need the hidden dimension
         self.vision_width = self.clip_model.visual.ln_post.normalized_shape[0]
-        print(f"Initialized CLIP vision encoder: {clip_model_name} with hidden dimension {self.vision_width}")
+        # print(f"Initialized CLIP vision encoder: {clip_model_name} with hidden dimension {self.vision_width}")
 
         for param in self.clip_model.parameters():
             param.requires_grad = False

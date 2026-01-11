@@ -107,17 +107,3 @@ class Flickr8kDataset(Dataset):
             'caption': caption,
             'image_name': image_name,
         }
-
-
-def collate_fn(batch: List[Dict]) -> Dict[str, any]:
-    """Collate function for DataLoader"""
-    images = torch.stack([item['image'] for item in batch])
-    captions = [item['caption'] for item in batch]
-    image_names = [item['image_name'] for item in batch]
-
-    return {
-        'image': images,
-        'caption': captions,
-        'image_name': image_names,
-    }
-
